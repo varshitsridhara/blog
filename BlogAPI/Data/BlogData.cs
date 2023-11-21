@@ -61,11 +61,18 @@ namespace BlogAPI.Data
             return true;
 
         }
-        public bool AddBlog(BlogModel blog)
+        public bool AddBlog(BlogModel blog,long userId)
         {
-            _db.Blogs.Add(blog);
-            _db.SaveChanges();
-            return true;
+            var user = _db.Users.Where(x => x.Id == userId).FirstOrDefault();
+            if(user != null)
+            {
+                blog.user=user;
+                _db.Blogs.Add(blog);
+                _db.SaveChanges();
+                return true;
+
+            }
+            else { return false; }
         }
         public bool DeleteBlog(long Id)
         {

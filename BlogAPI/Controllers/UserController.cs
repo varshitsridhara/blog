@@ -23,9 +23,18 @@ namespace BlogAPI.Controllers
         [HttpPost("/user")]
         public IActionResult CreateUser(User user)
         {
-            User createdUser = _userData.CreateUser(user);
-            string tokenString = signToken(createdUser);
-            return Ok(new AuthenticatedResponse { Token = tokenString });
+            User currentUser = _userData.CreateUser(user);
+            string tokenString = signToken(currentUser);
+            return Ok(new AuthenticatedResponse
+            {
+                Token = tokenString,
+                user = new Models.User
+                {
+                    Id = currentUser.Id,
+                    UserName = currentUser.UserName,
+                    Email = currentUser.Email,
+                }
+            });
         }
         [HttpGet("/user/{email}")]
         [Authorize]
@@ -40,10 +49,17 @@ namespace BlogAPI.Controllers
             {
                 return BadRequest("Invalid client request");
             }
-            if (_userData.ValidateUser(user))
+            var currentUser = _userData.ValidateUser(user);
+            if (currentUser != null)
             {
-                string tokenString = signToken(user);
-                return Ok(new AuthenticatedResponse { Token = tokenString });
+                string tokenString = signToken(currentUser);
+                return Ok(new AuthenticatedResponse { Token = tokenString, user = new Models.User
+                {
+                    Id = currentUser.Id,
+                    UserName = currentUser.UserName,
+                    Email = currentUser.Email,
+                } 
+                });
             }
             return Unauthorized();
         }
