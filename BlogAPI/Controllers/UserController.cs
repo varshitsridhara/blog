@@ -20,7 +20,7 @@ namespace BlogAPI.Controllers
         {
             _userData = userData;
         }
-        [HttpPost("/user")]
+        [HttpPost("register")]
         public IActionResult CreateUser(User user)
         {
             if (!ModelState.IsValid)
@@ -40,7 +40,7 @@ namespace BlogAPI.Controllers
                 }
             });
         }
-        [HttpGet("/user/{email}")]
+        [HttpGet("me/{email}")]
         [Authorize]
         public IActionResult GetUser(string email)
         {
