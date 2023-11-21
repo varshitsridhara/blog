@@ -23,6 +23,10 @@ namespace BlogAPI.Controllers
         [HttpPost("/user")]
         public IActionResult CreateUser(User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             User currentUser = _userData.CreateUser(user);
             string tokenString = signToken(currentUser);
             return Ok(new AuthenticatedResponse
@@ -45,6 +49,10 @@ namespace BlogAPI.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             if (user is null)
             {
                 return BadRequest("Invalid client request");

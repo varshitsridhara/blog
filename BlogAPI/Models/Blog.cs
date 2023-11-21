@@ -8,7 +8,9 @@ namespace BlogAPI.Models
     {
         [Key]
         public long Id { get; set; }
+        [Required]
         public string? Title { get; set; }
+        [Required]
         public string? Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;

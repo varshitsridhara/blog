@@ -160,3 +160,9 @@ C:\Users\Hussain\Desktop\server\BlogAPI\obj\Debug\net7.0\refint\BlogAPI.dll
 C:\Users\Hussain\Desktop\server\BlogAPI\obj\Debug\net7.0\BlogAPI.pdb
 C:\Users\Hussain\Desktop\server\BlogAPI\obj\Debug\net7.0\BlogAPI.genruntimeconfig.cache
 C:\Users\Hussain\Desktop\server\BlogAPI\obj\Debug\net7.0\ref\BlogAPI.dll
+C:\Users\Hussain\Desktop\server\BlogAPI\bin\Debug\net7.0\System.Net.Http.Formatting.dll
+C:\Users\Hussain\Desktop\server\BlogAPI\bin\Debug\net7.0\System.Web.Http.dll
+C:\Users\Hussain\Desktop\server\BlogAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Hussain\Desktop\server\BlogAPI\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\Hussain\Desktop\server\BlogAPI\bin\Debug\net7.0\BCrypt.Net-Next.dll
+C:\Users\Hussain\Desktop\server\BlogAPI\bin\Debug\net7.0\BouncyCastle.Crypto.dll

@@ -38,6 +38,10 @@ namespace BlogAPI.Controllers
         [Authorize]
         public IActionResult AddBlog(BlogModel blog)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             long userId = Convert.ToInt64(HttpContext.User.Claims.Where(x => x.Type.Equals("UserId", StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Value);
 
             return Ok(_blogData.AddBlog(blog,userId));
@@ -46,6 +50,10 @@ namespace BlogAPI.Controllers
         [Authorize]
         public IActionResult UpdateBlog(BlogModel blog)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             long userId = Convert.ToInt64(HttpContext.User.Claims.Where(x => x.Type.Equals("UserId", StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Value);
             var currBlog = _blogData.GetBlog(blog.Id);
             if (currBlog.user?.Id != userId)
@@ -54,7 +62,7 @@ namespace BlogAPI.Controllers
             }
             return Ok(_blogData.UpdateBlog(blog));
         }
-        [HttpDelete("/blog")]
+        [HttpDelete("/blog/{id:long}")]
         [Authorize]
         public IActionResult DeleteBlog(long id)
         {
