@@ -21,7 +21,7 @@ namespace BlogAPI.Controllers
         {
             return Ok(_blogData.GetBlogs());
         }
-        [HttpGet("/{id:long}")]
+        [HttpGet("{id:long}")]
         public IActionResult GetBlog(long id)
         {
 
