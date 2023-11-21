@@ -9,24 +9,39 @@ import { SignupComponent } from './signup/signup.component';
 import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from './services/user.service';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { AuthInterceptorComponent } from './auth-interceptor/auth-interceptor.component';
+import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    UserDashboardComponent,
+    AuthInterceptorComponent,
+    AuthGuardComponent
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DividerModule,
-    InputTextModule,
+    InputTextModule,HttpClientModule,
     ButtonModule,
     ReactiveFormsModule,
+    
     FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorComponent,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
