@@ -20,9 +20,13 @@ namespace BlogAPI.Controllers
         {
             _userData = userData;
         }
-        [HttpPost("/user")]
+        [HttpPost("register")]
         public IActionResult CreateUser(User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             User currentUser = _userData.CreateUser(user);
             string tokenString = signToken(currentUser);
             return Ok(new AuthenticatedResponse
@@ -36,7 +40,7 @@ namespace BlogAPI.Controllers
                 }
             });
         }
-        [HttpGet("/user/{email}")]
+        [HttpGet("me/{email}")]
         [Authorize]
         public IActionResult GetUser(string email)
         {
@@ -45,6 +49,10 @@ namespace BlogAPI.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             if (user is null)
             {
                 return BadRequest("Invalid client request");

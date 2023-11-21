@@ -1,4 +1,5 @@
 ﻿using BlogAPI.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogAPI.Data
@@ -33,7 +34,7 @@ namespace BlogAPI.Data
             var blogs = _db.Blogs.Where(x => x.user!.Id == userId).ToList();
             if (blogs is null)
             {
-                throw new Exception("No blogs found");
+                throw new KeyNotFoundException("No Blogs found");
             }
             return blogs;
         }
@@ -42,7 +43,7 @@ namespace BlogAPI.Data
             var blog = _db.Blogs.Where(x => x.Id == Id).Include(x => x.user).FirstOrDefault();
             if (blog is null)
             {
-                throw new Exception("Blog not found");
+                throw new KeyNotFoundException("Blog not found");
             }
             return blog;
         }
@@ -51,7 +52,7 @@ namespace BlogAPI.Data
             var resBlog = _db.Blogs.Where(x => x.Id == blog.Id).FirstOrDefault();
             if (resBlog == null)
             {
-                throw new Exception("Blog not found");
+                throw new KeyNotFoundException("Blog not found");
 
             }
             resBlog.Title = blog.Title;
@@ -79,7 +80,7 @@ namespace BlogAPI.Data
             var resBlog = _db.Blogs.Where(x => x.Id == Id).FirstOrDefault();
             if (resBlog is null)
             {
-                throw new Exception("Blog not found");
+                throw new KeyNotFoundException("Blog not found");
             }
             _db.Remove(resBlog);
             _db.SaveChanges();
