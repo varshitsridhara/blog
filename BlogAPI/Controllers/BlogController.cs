@@ -22,15 +22,14 @@ namespace BlogAPI.Controllers
             return Ok(_blogData.GetBlogs());
         }
         [HttpGet("/blog/{id:long}")]
-        [Authorize]
         public IActionResult GetBlog(long id)
         {
 
             return Ok(_blogData.GetBlog(id));
         }
-        [HttpGet("/user/{id:long}/blogs")]
+        [HttpGet("/user/blogs")]
         [Authorize]
-        public IActionResult GetUserBlog(long id)
+        public IActionResult GetUserBlog()
         {
             long userId = Convert.ToInt64(HttpContext.User.Claims.Where(x => x.Type.Equals("UserId", StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Value);
             return Ok(_blogData.GetUserBlog(userId));
@@ -39,7 +38,9 @@ namespace BlogAPI.Controllers
         [Authorize]
         public IActionResult AddBlog(BlogModel blog)
         {
-            return Ok(_blogData.AddBlog(blog));
+            long userId = Convert.ToInt64(HttpContext.User.Claims.Where(x => x.Type.Equals("UserId", StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Value);
+
+            return Ok(_blogData.AddBlog(blog,userId));
         }
         [HttpPut("/blog")]
         [Authorize]

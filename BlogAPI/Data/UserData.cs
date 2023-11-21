@@ -18,15 +18,11 @@ namespace BlogAPI.Data
             _db.SaveChanges();
             return GetUser(user.Email!);
         }
-        public bool ValidateUser(User user)
+        public User? ValidateUser(User user)
         {
             var resUser = _db.Users.Where(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
-            if (resUser != null)
-            {
-                return true;
-
-            }
-            return false;
+            
+            return resUser;
         }
         public User GetUser(string email)
         {

@@ -34,16 +34,16 @@ namespace BlogAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("OwnerEmail")
+                    b.Property<string>("OwnerName")
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<long?>("userId")
                         .HasColumnType("bigint");
@@ -59,9 +59,9 @@ namespace BlogAPI.Migrations
                         {
                             Id = 1L,
                             Content = "This is my first blog",
-                            CreatedAt = new DateTime(2023, 11, 20, 17, 18, 46, 961, DateTimeKind.Local).AddTicks(5336),
+                            CreatedAt = new DateTime(2023, 11, 21, 6, 17, 22, 784, DateTimeKind.Utc).AddTicks(5462),
                             Title = "First Blog",
-                            UpdatedAt = new DateTime(2023, 11, 20, 17, 18, 46, 961, DateTimeKind.Local).AddTicks(5348)
+                            UpdatedAt = new DateTime(2023, 11, 21, 6, 17, 22, 784, DateTimeKind.Utc).AddTicks(5465)
                         });
                 });
 

@@ -35,9 +35,9 @@ namespace BlogAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Content = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    OwnerEmail = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    OwnerName = table.Column<string>(type: "text", nullable: true),
                     userId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
@@ -52,8 +52,8 @@ namespace BlogAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Blogs",
-                columns: new[] { "Id", "Content", "CreatedAt", "OwnerEmail", "Title", "UpdatedAt", "userId" },
-                values: new object[] { 1L, "This is my first blog", new DateTime(2023, 11, 20, 17, 18, 46, 961, DateTimeKind.Local).AddTicks(5336), null, "First Blog", new DateTime(2023, 11, 20, 17, 18, 46, 961, DateTimeKind.Local).AddTicks(5348), null });
+                columns: new[] { "Id", "Content", "CreatedAt", "OwnerName", "Title", "UpdatedAt", "userId" },
+                values: new object[] { 1L, "This is my first blog", new DateTime(2023, 11, 21, 6, 17, 22, 784, DateTimeKind.Utc).AddTicks(5462), null, "First Blog", new DateTime(2023, 11, 21, 6, 17, 22, 784, DateTimeKind.Utc).AddTicks(5465), null });
 
             migrationBuilder.InsertData(
                 table: "Users",
