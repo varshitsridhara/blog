@@ -9,9 +9,9 @@ const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'userdashboard', component: UserDashboardComponent,canActivate: [AuthGuardComponent] },
-  { path: 'profile/:id', component: UserDashboardComponent, canActivate: [AuthGuardComponent] },
-  { path: 'signup', component: SignupComponent }
+  { path: 'userdashboard', component: UserDashboardComponent, canActivate: [AuthGuardComponent] },
+  { path: 'login/signup', component: SignupComponent }
+
 ];
 
 

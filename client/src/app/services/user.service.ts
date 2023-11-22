@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../user';
 
@@ -12,7 +12,9 @@ export class UserService {
   private apiUrl = 'http://localhost:5280/api/User'; // Replace with your actual API URL
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
-  constructor(private httpClient: HttpClient, public router: Router) { }
+
+  constructor(private httpClient: HttpClient, public router: Router) {}
+
   login(user: User): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/login`, user)
       .pipe(
@@ -23,14 +25,15 @@ export class UserService {
   getAccessToken() {
     return localStorage.getItem('access_token');
   }
+
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
-    return (authToken !== null) ? true : false;
+    return (authToken !== null);
   }
 
   logout() {
     if (localStorage.removeItem('access_token') == null) {
-      this.router.navigate(['users/login']);
+      this.router.navigate(['login']);
     }
   }
 
@@ -45,4 +48,10 @@ export class UserService {
     }
     return throwError(msg);
   }
+
+  registerUser(user: User): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/signup`, user); 
+        
+  }
+  
 }

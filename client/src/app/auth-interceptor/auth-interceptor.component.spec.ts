@@ -1,16 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AuthInterceptorComponent } from './auth-interceptor.component';
+import { AuthInterceptor } from './auth-interceptor.component';
 
 describe('AuthInterceptorComponent', () => {
-  let component: AuthInterceptorComponent;
-  let fixture: ComponentFixture<AuthInterceptorComponent>;
+  let component: AuthInterceptor;
+  let fixture: ComponentFixture<AuthInterceptor>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthInterceptorComponent]
+      declarations: [AuthInterceptor]
     });
-    fixture = TestBed.createComponent(AuthInterceptorComponent);
+    fixture = TestBed.createComponent(AuthInterceptor);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

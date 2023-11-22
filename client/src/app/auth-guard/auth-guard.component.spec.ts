@@ -1,21 +1,36 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivate } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../services/user.service';
 
-import { AuthGuardComponent } from './auth-guard.component';
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardComponent implements CanActivate {
 
-describe('AuthGuardComponent', () => {
-  let component: AuthGuardComponent;
-  let fixture: ComponentFixture<AuthGuardComponent>;
+  invalidCredentialsMessage: string = ''; // Add a property to store the message
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AuthGuardComponent]
-    });
-    fixture = TestBed.createComponent(AuthGuardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  constructor(
+    public authService: UserService,
+    public router: Router,
+    private toastr: ToastrService
+  ) { }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.authService.isLoggedIn) {
+      this.invalidCredentialsMessage = 'Invalid credentials'; // Set the message
+      this.toastr.error(this.invalidCredentialsMessage, 'Authentication Error'); // Display the message using Toastr
+
+      // Return true to allow access to the route
+      return true;
+    }
+
+    // Clear the message if the user is logged in
+    this.invalidCredentialsMessage = '';
+    return true;
+  }
+}
