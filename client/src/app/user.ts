@@ -1,5 +1,5 @@
 export class User{
-    id:String|undefined;
+    id?: string;
     username:String|undefined;
     email: String|undefined;
     password: String|undefined;

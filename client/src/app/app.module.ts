@@ -15,7 +15,11 @@ import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { AuthInterceptorComponent } from './auth-interceptor/auth-interceptor.component';
 import { AuthGuardComponent } from './auth-guard/auth-guard.component';
-
+import { ToastModule } from 'primeng/toast';
+import{ BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -24,24 +28,28 @@ import { AuthGuardComponent } from './auth-guard/auth-guard.component';
     SignupComponent,
     UserDashboardComponent,
     AuthInterceptorComponent,
-    AuthGuardComponent
+    AuthGuardComponent,
+    
    
   ],
   imports: [
     BrowserModule,
+    MessagesModule,
     AppRoutingModule,
     DividerModule,
     InputTextModule,HttpClientModule,
     ButtonModule,
     ReactiveFormsModule,
-    
-    FormsModule
+    ToastModule,
+    MessageModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [{
-    provide:HTTP_INTERCEPTORS,
+    provide:[HTTP_INTERCEPTORS],
     useClass: AuthInterceptorComponent,
     multi: true
-  }],
+  },MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

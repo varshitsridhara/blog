@@ -1,53 +1,124 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
+import { User } from '../user';
+import { UserService } from '../services/user.service';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html',
+  templateUrl:'./signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  username: string = '';
-  email: string = '';
-  password: string = '';
-  confirm_password:string='';
-  signupForm: FormGroup;
+ 
+  signupForm = this.fb.group({
+  username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirm_password: ['', [Validators.required, this.passwordMatchValidator.bind(this)]]
+  });
+  errormessages!:Message[];
+  successmessages!:Message[];
 
-  constructor(private fb: FormBuilder) {
-    this.signupForm = this.fb.group({
-      username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password:['',[Validators.required]],
-confirm_password:['',[Validators.required]]
-    })}
-    passwordMatchValidator(formGroup: FormGroup) {
-      const passwordControl = formGroup.get('password');
-      const confirm_passwordControl = formGroup.get('confirm_password');
-    
-      if (passwordControl && confirm_passwordControl) {
-        const password = passwordControl.value;
-        const confirm_password = confirm_passwordControl.value;
-    
-        return password === confirm_password ? null : { passwordMismatch: true };
-      }
-    
-      return null;
+  constructor(private fb: FormBuilder, private userService: UserService ,private messageService:MessageService ,private router:Router) {
+   
+  }
+
+  get formControls() {
+    return this.signupForm.controls;
+  }
+
+  get usernameInput() {
+    return this.signupForm.get('username');
+  }
+  passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.get('password')?.value;
+    const confirm_password = control.get('confirm_password')?.value;
+  
+    // Check if both controls have values and they match
+    if (password && confirm_password && password !== confirm_password) {
+      return { 'passwordMismatch': true };
     }
   
-  signup() {
-    // You can implement signup logic here
-    // Set it to false to hide the link
-    console.log('Username:', this.username);
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-    console.log('Confirm Password:',this.confirm_password);
-    console.log('Signup form submitted:', this.signupForm.value);
+    // If values match or one of the controls is null, return null (no error)
+    return null;
+  }
+  signUp(){
+    const postData={...this.signupForm.value};
+    delete postData.confirm_password;
+    this.userService.registerUser(postData as User).subscribe(
+      response=>{
+        console.log(response),
+        this.router.navigate(['login'])
+      },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      error =>
+      {
+        console.log(error);
+          this.errormessages = [
+            { severity: 'error', summary: 'Error', detail: error.error.message },
+        ];
+       
+      }
+    )
   }
   
-  login() {
+  // signUp() {
+  //   if (this.signupForm.valid) {
+  //     const user: User = {
+  //       username: this.signupForm.value.username,
+  //       email: this.signupForm.value.email,
+  //       password: this.signupForm.value.password
+  //     };
+
+  //     this.userService.signUp(user).subscribe(
+  //       () => {
+  //         console.log('Signup successful..');
+  //         alert('Signup successful! Welcome to our platform.');
+  //       },
+  //       (error: any) => {
+  //         console.error('Signup error:', error);
+  //       }
+  //     );
+  //   } else {
+  //     // Handle the case when the form is not valid (display validation messages, etc.)
+  //     console.log('Form is not valid. Displaying validation messages or taking other actions.');
+  //   // For example, you can mark the form controls as touched to trigger validation messages
+  //   this.signupForm.markAllAsTouched();
+  //   }
+
+  // }
+
+
+   login() {
     // You can implement authentication logic here
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
+    console.log('Username:',  this.signupForm.value.username);
+    console.log('Password:', this.signupForm.value.password);
+  
   }
  
 }
