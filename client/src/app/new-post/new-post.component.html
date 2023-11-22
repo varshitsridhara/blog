@@ -1,0 +1,36 @@
+<header>
+    <div class="logo">
+        <img src="../../assets/images/logo.png" alt="Your Logo">
+    </div>
+    <div class="site-name">
+        <h1>Blog Application</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/user-dashboard" class="button">Home</a></li>
+            <li><a href="#">Sign Out</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<div class="card">
+    <div class="form-group">
+        <label for="blogTitle"><b>Blog Title:</b></label>
+        <input type="text" id="blogTitle" [(ngModel)]="blogTitle" class="form-control">
+    </div>
+
+    <p-editor [(ngModel)]="text" [style]="{ height: '320px' }">
+        <ng-template pTemplate="header">
+            <span class="ql-formats">
+                <button type="button" class="ql-bold" aria-label="Bold">B</button>
+                <button type="button" class="ql-italic" aria-label="Italic">I</button>
+                <button type="button" class="ql-underline" aria-label="Underline">U</button>
+            </span>
+        </ng-template>
+    </p-editor>
+
+    <div class="form-group">
+        <a routerLink="/user-dashboard"><button type="button" class="publish-button" (click)="publishBlog()">Publish</button></a>
+    </div>
+</div>

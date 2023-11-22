@@ -1,0 +1,14 @@
+<app-header></app-header>
+
+<div class="blog-list">
+    <div class="blog-item" *ngFor="let blog of blogs">
+        <h2>{{ blog.title }}</h2>
+        <p>Author: {{ blog.author }}</p>
+        <p>{{ blog.excerpt }}</p>
+        <div class="blog-buttons">
+            <button class="button" >View</button>
+            <button class="button">Edit</button>
+        </div>
+    </div>
+</div>
+

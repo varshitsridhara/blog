@@ -1,0 +1,22 @@
+<div class="blog-item" >
+    <h2>Blog Title</h2>
+    <p>Author: John Due</p>
+    <p>This is an example blog detail page. Quill performs generally well in terms of accessibility. The elements in the toolbar can be tabbed and have the necessary ARIA roles/attributes for screen readers. One known limitation is the lack of arrow key support for dropdowns in the toolbar that may be overcome with a custom toolbar.</p>
+    <div class="blog-buttons">
+        <button class="button"  >Edit Blog</button>
+        <button class="button">Delete Blog</button>
+    </div>
+
+    <!-- Display the editor if isEditing is true -->
+<div *ngIf="isEditing" class="blog-editor">
+    <!-- Include your editor component here -->
+    <p-editor [(ngModel)]="blog.content" [style]="{ height: '320px' }">
+        <ng-template pTemplate="header">
+            <span class="ql-formats">
+                <button type="button" class="ql-bold" aria-label="Bold">B</button>
+                <button type="button" class="ql-italic" aria-label="Italic">I</button>
+                <button type="button" class="ql-underline" aria-label="Underline">U</button>
+            </span>
+        </ng-template>
+    </p-editor>
+</div>
