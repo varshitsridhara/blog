@@ -1,9 +1,12 @@
 using AutoMapper;
 using BlogAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -81,12 +84,26 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 
+app.UseExceptionHandler(c => c.Run(async context =>
+{
+    Exception? exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
+   context.Response.StatusCode = 500;
+    await context.Response.WriteAsJsonAsync(new
+    {
+        detail = exception?.StackTrace,
+        message = exception?.Message,
+                  
+    });
+}));
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 ApplyMigration();
 app.Run();

@@ -6,7 +6,9 @@ namespace BlogAPI.Models
     {
         [Key]
         public long? Id { get; set; }
+        [Required]
         public string? Email { get; set; }
+        [Required]
         public string? Password { get; set; }
         public string? UserName { get; set; }
         public User(long Id, string Email, string password, string UserName)
