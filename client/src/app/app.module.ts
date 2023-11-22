@@ -9,44 +9,55 @@ import { SignupComponent } from './signup/signup.component';
 import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserService } from './services/user.service';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { AuthInterceptorComponent } from './auth-interceptor/auth-interceptor.component';
-import { AuthGuardComponent } from './auth-guard/auth-guard.component';
+import { NewPostComponent } from './new-post/new-post.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { BlogListComponent } from './blog-list/blog-list.component';
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { EditorModule } from 'primeng/editor';
+import { UserBlogDetailsComponent } from './user-blog-details/user-blog-details.component';
+import {AuthInterceptorComponent} from  './auth-interceptor/auth-interceptor.component';
+
 import { ToastModule } from 'primeng/toast';
 import{ BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent,
+    HeaderComponent,
     UserDashboardComponent,
-    AuthInterceptorComponent,
-    AuthGuardComponent,
-    
-   
+    NewPostComponent,
+  HomepageComponent,
+  BlogListComponent,
+  BlogDetailsComponent,
+    SignupComponent,
+    UserBlogDetailsComponent
   ],
   imports: [
     BrowserModule,
     MessagesModule,
     AppRoutingModule,
-    DividerModule,
     InputTextModule,HttpClientModule,
     ButtonModule,
+HttpClientModule,
+ToastModule,
+BrowserAnimationsModule,
+MessageModule,
+DividerModule,
+
+
     ReactiveFormsModule,
-    ToastModule,
-    MessageModule,
+    EditorModule,
     FormsModule,
-    BrowserAnimationsModule
+    
   ],
   providers: [{
-    provide:[HTTP_INTERCEPTORS],
+    provide:HTTP_INTERCEPTORS,
     useClass: AuthInterceptorComponent,
     multi: true
   },MessageService],

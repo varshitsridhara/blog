@@ -1,0 +1,19 @@
+<app-header>
+    <li headerComp1><a routerLink="/homepage" class="Button">Home</a></li>
+    <li headerComp2><a routerLink="/new-post" class="Button">New Post</a></li>
+    <li headerComp3><a routerLink="/homepage" class="Button">Sign out</a></li>
+</app-header>
+
+<div class="blog-list">
+    <div class="blog-item" *ngFor="let blog of blogList">
+        <a routerLink="/user-blog-details">
+            <div class="details">
+                <h2>{{ blog.title }}</h2>
+                <p>Author: {{ blog.ownerName }}</p>
+                <p>{{ blog.content }}</p>
+            </div>
+        </a>
+       
+    </div>
+</div>
+

@@ -37,7 +37,7 @@ constructor(private fb: FormBuilder, private userService: UserService, private r
           localStorage.setItem("access_token",response.token);
           this.userService.currentUser=response.user;
           // Redirect or perform additional actions as needed
-          this.router.navigate(['/userdashboard']);
+          this.router.navigate(['/user-dashboard']);
         },
         (error:any) => {
           // Handle login error
