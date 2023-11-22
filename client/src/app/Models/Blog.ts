@@ -1,15 +1,13 @@
 export class Blog{
 
-    constructor(id: number, title:string, author: string, content: string, excerpt: string){
+    constructor(id: number, title:string, ownerName: string, content: string){
         this.id=id;
         this.title=title;
-        this.author=author;
+        this.ownerName=ownerName;
         this.content=content;
-        this.excerpt=excerpt;
     }
     id: number=0;
     title: string='';
-    author: string='';
+    ownerName: string='';
     content: string='';
-    excerpt: string='';
 }

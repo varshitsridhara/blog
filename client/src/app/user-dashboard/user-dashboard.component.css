@@ -17,6 +17,10 @@ body {
     margin-bottom: 20px;
 }
 
+a{
+    text-decoration: none;
+}
+
 /* Add styles for blog buttons */
 .blog-buttons button {
     margin-right: 10px;

@@ -3740,19 +3740,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Hussain\\.nuget\\packages\\": {}
+    "C:\\Users\\PREETHI164\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hussain\\Desktop\\server\\BlogAPI\\BlogAPI.csproj",
+      "projectUniqueName": "c:\\Users\\PREETHI164\\OneDrive\\Desktop\\Angular complete course\\blog\\BlogAPI\\BlogAPI.csproj",
       "projectName": "BlogAPI",
-      "projectPath": "C:\\Users\\Hussain\\Desktop\\server\\BlogAPI\\BlogAPI.csproj",
-      "packagesPath": "C:\\Users\\Hussain\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hussain\\Desktop\\server\\BlogAPI\\obj\\",
+      "projectPath": "c:\\Users\\PREETHI164\\OneDrive\\Desktop\\Angular complete course\\blog\\BlogAPI\\BlogAPI.csproj",
+      "packagesPath": "C:\\Users\\PREETHI164\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\PREETHI164\\OneDrive\\Desktop\\Angular complete course\\blog\\BlogAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Hussain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PREETHI164\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3854,7 +3854,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },

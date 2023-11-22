@@ -9,10 +9,7 @@
         <a routerLink="/blog-details/{{ blog.id }}">
             <h2>{{ blog.title }}</h2>
           </a>
-        <p>Author: {{ blog.author }}</p>
-        <p>{{ blog.excerpt }}</p>
-        <div class="blog-buttons">
-            <button class="button" >View blog</button>
-        </div>
+        <p>Author: {{ blog.ownerName }}</p>
+        <p>{{ blog.content }}</p>
     </div>
 </div>
