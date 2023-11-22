@@ -35,6 +35,7 @@ constructor(private fb: FormBuilder, private userService: UserService, private r
           // Handle successful login
           console.log('Login successful', response);
           localStorage.setItem("access_token",response.token);
+          this.userService.currentUser=response.user;
           // Redirect or perform additional actions as needed
           this.router.navigate(['/userdashboard']);
         },

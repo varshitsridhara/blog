@@ -11,7 +11,7 @@ import { User } from '../user';
 export class UserService {
   private apiUrl = 'http://localhost:5280/api/User'; // Replace with your actual API URL
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
+  currentUser :undefined;
 
   constructor(private httpClient: HttpClient, public router: Router) {}
   getUserByEmail(email:string){
@@ -32,10 +32,9 @@ export class UserService {
   }
 
   logout() {
-    if (localStorage.removeItem('access_token') == null) {
+    localStorage.removeItem('access_token') ;
       this.router.navigate(['login']);
     }
-  }
 
  
   registerUser(user: User): Observable<any> {

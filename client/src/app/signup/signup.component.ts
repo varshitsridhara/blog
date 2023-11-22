@@ -5,6 +5,7 @@ import { User } from '../user';
 import { UserService } from '../services/user.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-signup',
@@ -12,12 +13,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+ 
   signupForm = this.fb.group({
   username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirm_password: ['', [Validators.required, this.passwordMatchValidator.bind(this)]]
   });
+  errormessages!:Message[];
+  successmessages!:Message[];
 
   constructor(private fb: FormBuilder, private userService: UserService ,private messageService:MessageService ,private router:Router) {
    
@@ -48,12 +52,37 @@ export class SignupComponent {
     this.userService.registerUser(postData as User).subscribe(
       response=>{
         console.log(response),
-        this.messageService.add({severity:'success',summary:'Success',detail:'Message Content'});
         this.router.navigate(['login'])
       },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
       error =>
       {
-        this.messageService.add({severity:'success',summary:'Success',detail:'Message Content'});
+        console.log(error);
+          this.errormessages = [
+            { severity: 'error', summary: 'Error', detail: error.error.message },
+        ];
+       
       }
     )
   }
