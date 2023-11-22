@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "taTKLydS9J+Uh5c0XW7FbidSVIqDgw7uspqzgH0Qe12YltU5i6Mf3+P7s1x+BqRXKRiOhxuSefdnTR9RQvIcnQ==",
+  "dgSpecHash": "GZ+HOdG1Igz6BGSe1XNszYTD6BTxFl7hPFF9gc6jAhtJQhdmkL535F8zJDOohpgCuelf3zoA9rICxo3CnpQkiA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\PREETHI164\\OneDrive\\Desktop\\Angular complete course\\blog\\BlogAPI\\BlogAPI.csproj",
+  "projectFilePath": "C:\\Users\\PREETHI164\\OneDrive\\Desktop\\Angular complete course\\blog\\BlogAPI\\BlogAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PREETHI164\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\PREETHI164\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -17,7 +17,7 @@ export class UserDashboardComponent {
   getBlogs(){
     this.blogservice.GetAllBlogs().subscribe((blogs: Blog[])=>{
     
-      this.blogList= blogs;
+    this.blogList= blogs;
   })
 }
 

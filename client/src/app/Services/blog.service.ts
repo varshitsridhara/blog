@@ -34,7 +34,7 @@ export class BlogService{
     //     // this.blogs.push(newPost);
     //     return this.http.post(`${this.blogUrl}/blog`,JSON.stringify({id,title,content}))
     // }
-    createNewPost(newPost: Blog): Observable<any> {     
+    createNewPost(newPost:any): Observable<any> {     
         return this.http.post(`${this.blogUrl}/blog`, newPost);   
     }
 

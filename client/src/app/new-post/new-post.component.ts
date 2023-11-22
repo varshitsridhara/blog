@@ -31,8 +31,7 @@ export class NewPostComponent implements OnInit{
     console.log('Blog Title:', this.blogTitle);
     console.log('Blog Content:', this.text );
 
-    const newPost: Blog = {
-      id: this.blogList.length + 1,
+    const newPost = {
       title: this.blogTitle,
       ownerName: this.ownerName,
       content: this.text

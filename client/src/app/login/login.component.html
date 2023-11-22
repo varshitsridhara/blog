@@ -1,33 +1,47 @@
 <div class="card">
-    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
-      <div class="form-container flex flex-column md:flex-row">
-        <div class="input-section w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-          <div class="input-group flex flex-wrap justify-content-center align-items-center gap-2">
-            <label class="label" for="username">Username</label>
-            <input pInputText id="username" name="username" type="text" class="input-field" formControlName="username"
-              [ngClass]="{'invalid': loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)}">
-            <div class="validation-message" *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">
-              Username is required.
-            </div>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+    <div class="form-container flex flex-column md:flex-row">
+      <div class="input-section w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+        
+        <!-- Email Input -->
+        <div class="input-group flex flex-wrap justify-content-center align-items-center gap-2">
+          <label class="label" for="email">Email</label>
+          <input pInputText id="email" name="email" type="text" class="input-field" formControlName="email" 
+            [ngClass]="{'invalid': loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)}" />
+          <div class="validation-message" *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+            Email is required.
           </div>
-          <div class="input-group flex flex-wrap justify-content-center align-items-center gap-2">
-            <label class="label" for="password">Password</label>
-            <input pInputText id="password" name="password" type="password" class="input-field"  formControlName="password" [ngClass]="{'invalid': loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)}"  />
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-group flex flex-wrap justify-content-center align-items-center gap-2">
+          <label class="label" for="password">Password</label>
+          <input pInputText id="password" name="password" type="password" class="input-field" formControlName="password"
+            [ngClass]="{'invalid': loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)}" />
           <div class="validation-message" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
             Password is required.
           </div>
-          </div>
-          <p-button routerLink="/user-dashboard" label="Login" icon="pi pi-user" styleClass="login-button" [disabled]="loginForm.invalid"></p-button>
         </div>
-        <div class="divider-section w-full md:w-2">
-          <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"><b>OR</b></p-divider>
-        </div>
-        <div class="signup-section w-full md:w-5 flex align-items-center justify-content-center py-5">
-          <a routerLink="/signup" class="signup-button">
-            <p-button label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-success"></p-button>
-          </a>
-        </div>
+
+        <!-- Login Button -->
+        <p-button label="Login" (click)="login()" icon="pi pi-user" styleClass="login-button" [disabled]="loginForm.invalid"></p-button>
       </div>
-    </form>
-  </div>
-  
+      
+       <p-messages [(value)]="messages" [enableService]="false"></p-messages>
+      
+      <!-- Divider Section -->
+      <div class="divider-section w-full md:w-2">
+        <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"><b>OR</b></p-divider>
+      </div>
+      
+      <!-- Signup Section -->
+      <div class="signup-section w-full md:w-5 flex align-items-center justify-content-center py-5">
+        <a routerLink="/sign-up" class="signup-button">
+          <p-button label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-success"></p-button>
+        </a>
+      </div>
+    </div>
+    
+  </form>
+ 
+</div>

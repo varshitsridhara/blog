@@ -15,10 +15,16 @@ import { NewPostComponent } from './new-post/new-post.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { EditorModule } from 'primeng/editor';
 import { UserBlogDetailsComponent } from './user-blog-details/user-blog-details.component';
+import {AuthInterceptorComponent} from  './auth-interceptor/auth-interceptor.component';
 
+import { ToastModule } from 'primeng/toast';
+import{ BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,17 +40,27 @@ import { UserBlogDetailsComponent } from './user-blog-details/user-blog-details.
   ],
   imports: [
     BrowserModule,
+    MessagesModule,
     AppRoutingModule,
-    DividerModule,
-    InputTextModule,
+    InputTextModule,HttpClientModule,
     ButtonModule,
 HttpClientModule,
+ToastModule,
+BrowserAnimationsModule,
+MessageModule,
+DividerModule,
+
 
     ReactiveFormsModule,
     EditorModule,
-    FormsModule
+    FormsModule,
+    
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorComponent,
+    multi: true
+  },MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
