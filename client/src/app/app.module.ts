@@ -18,6 +18,8 @@ import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 import { ToastModule } from 'primeng/toast';
 import{ BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -32,12 +34,14 @@ import { MessageService } from 'primeng/api';
   ],
   imports: [
     BrowserModule,
+    MessagesModule,
     AppRoutingModule,
     DividerModule,
     InputTextModule,HttpClientModule,
     ButtonModule,
     ReactiveFormsModule,
     ToastModule,
+    MessageModule,
     FormsModule,
     BrowserAnimationsModule
   ],

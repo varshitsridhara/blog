@@ -27,6 +27,8 @@
         <p-button label="Login" (click)="login()" icon="pi pi-user" styleClass="login-button" [disabled]="loginForm.invalid"></p-button>
       </div>
       
+       <p-messages [(value)]="messages" [enableService]="false"></p-messages>
+      
       <!-- Divider Section -->
       <div class="divider-section w-full md:w-2">
         <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"><b>OR</b></p-divider>
@@ -34,10 +36,12 @@
       
       <!-- Signup Section -->
       <div class="signup-section w-full md:w-5 flex align-items-center justify-content-center py-5">
-        <a routerLink="signup" class="signup-button">
+        <a routerLink="/sign-up" class="signup-button">
           <p-button label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-success"></p-button>
         </a>
       </div>
     </div>
+    
   </form>
+ 
 </div>

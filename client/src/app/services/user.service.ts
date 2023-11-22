@@ -14,12 +14,12 @@ export class UserService {
   currentUser = {};
 
   constructor(private httpClient: HttpClient, public router: Router) {}
+  getUserByEmail(email:string){
+
+  }
 
   login(user: User): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}/login`, user)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.httpClient.post(`${this.apiUrl}/login`, user);
   }
 
   getAccessToken() {
@@ -37,20 +37,9 @@ export class UserService {
     }
   }
 
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
-  }
-
+ 
   registerUser(user: User): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}/signup`, user); 
+    return this.httpClient.post(`${this.apiUrl}/register`, user); 
         
   }
   

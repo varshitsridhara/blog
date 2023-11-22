@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-
+import { MessageService } from 'primeng/api';
+import { Message } from 'primeng/api';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,8 +11,9 @@ import { UserService } from '../services/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  messages!:Message[];
 users:[]=[];
-constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+constructor(private fb: FormBuilder, private userService: UserService, private router: Router ,private messageService:MessageService) {
   this.loginForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -28,7 +30,6 @@ constructor(private fb: FormBuilder, private userService: UserService, private r
   login() {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
-
       this.userService.login(credentials).subscribe(
         (response:any) => {
           // Handle successful login
@@ -39,9 +40,14 @@ constructor(private fb: FormBuilder, private userService: UserService, private r
         },
         (error:any) => {
           // Handle login error
-          console.error('Login failed', error);
+          console.log(error);
+          this.messages = [
+            { severity: 'error', summary: 'Error', detail: error.error.message },
+        ];
+    }
+          //this.messageService.add({ severity: 'error', summary: 'Error',detail: 'Something went wrong'})
           // Display error message to the user or perform other actions
-        }
+        
       );
     }
   }
