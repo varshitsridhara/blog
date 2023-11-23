@@ -31,15 +31,20 @@ namespace BlogAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<long>("Likes")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("OwnerName")
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -59,10 +64,43 @@ namespace BlogAPI.Migrations
                         {
                             Id = 1L,
                             Content = "This is my first blog",
-                            CreatedAt = new DateTime(2023, 11, 21, 6, 17, 22, 784, DateTimeKind.Utc).AddTicks(5462),
+                            CreatedAt = new DateTime(2023, 11, 23, 15, 48, 2, 927, DateTimeKind.Utc).AddTicks(1171),
+                            Likes = 0L,
                             Title = "First Blog",
-                            UpdatedAt = new DateTime(2023, 11, 21, 6, 17, 22, 784, DateTimeKind.Utc).AddTicks(5465)
+                            UpdatedAt = new DateTime(2023, 11, 23, 15, 48, 2, 927, DateTimeKind.Utc).AddTicks(1174)
                         });
+                });
+
+            modelBuilder.Entity("BlogAPI.Models.Comment", b =>
+                {
+                    b.Property<long>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("CommentId"));
+
+                    b.Property<long>("BlogId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("BlogModelId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<long>("Likes")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ParentCommentId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("BlogModelId");
+
+                    b.HasIndex("ParentCommentId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("BlogAPI.Models.User", b =>
@@ -74,9 +112,11 @@ namespace BlogAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long?>("Id"));
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("UserName")
@@ -103,6 +143,30 @@ namespace BlogAPI.Migrations
                         .HasForeignKey("userId");
 
                     b.Navigation("user");
+                });
+
+            modelBuilder.Entity("BlogAPI.Models.Comment", b =>
+                {
+                    b.HasOne("BlogAPI.Models.BlogModel", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogModelId");
+
+                    b.HasOne("BlogAPI.Models.Comment", "ParentComment")
+                        .WithMany("Comments")
+                        .HasForeignKey("ParentCommentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("ParentComment");
+                });
+
+            modelBuilder.Entity("BlogAPI.Models.BlogModel", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("BlogAPI.Models.Comment", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

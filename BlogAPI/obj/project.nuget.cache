@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HKWriHP8Z5qfR6n37Hh0HQf3OoL9CbLg7MPYHOlx8npFBrYHzNejBFHv6VSReFGfyhOZzZ6FqepFhJXe8vm5WQ==",
+  "dgSpecHash": "WyNXlf9cDRdbjXMMbNcW0nFA2oeaDgre/rjprMY8YKHB1e6w/P9pWUOXAKMfF1uAKHeb1xNKDIY5tPjtbVDxvA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hussain\\Desktop\\server\\BlogAPI\\BlogAPI.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,8 @@
     "C:\\Users\\Hussain\\.nuget\\packages\\microsoft.aspnet.webapi.client\\6.0.0\\microsoft.aspnet.webapi.client.6.0.0.nupkg.sha512",
     "C:\\Users\\Hussain\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.3.0\\microsoft.aspnet.webapi.core.5.3.0.nupkg.sha512",
     "C:\\Users\\Hussain\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.14\\microsoft.aspnetcore.authentication.jwtbearer.7.0.14.nupkg.sha512",
+    "C:\\Users\\Hussain\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.14\\microsoft.aspnetcore.jsonpatch.7.0.14.nupkg.sha512",
+    "C:\\Users\\Hussain\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.14\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.14.nupkg.sha512",
     "C:\\Users\\Hussain\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.11\\microsoft.aspnetcore.openapi.7.0.11.nupkg.sha512",
     "C:\\Users\\Hussain\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Hussain\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

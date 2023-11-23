@@ -40,7 +40,7 @@ namespace BlogAPI.Data
         }
         public BlogModel GetBlog(long Id)
         {
-            var blog = _db.Blogs.Where(x => x.Id == Id).Include(x => x.user).FirstOrDefault();
+            var blog = _db.Blogs.Where(x => x.Id == Id).Include(x => x.user).Include(x=>x.Comments).FirstOrDefault();
             if (blog is null)
             {
                 throw new KeyNotFoundException("Blog not found");

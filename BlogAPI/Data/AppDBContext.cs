@@ -25,11 +25,17 @@ namespace BlogAPI.Data
         }
         public DbSet<User> Users { get; set; }
         public DbSet<BlogModel> Blogs { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Comment>()
+          .HasOne(e => e.ParentComment)           
+          .WithMany(e => e.Comments)       
+          .HasForeignKey(e => e.ParentCommentId)     
+          .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<User>().HasData(
             new User()
             {

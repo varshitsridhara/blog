@@ -11,9 +11,11 @@ namespace BlogAPI.Controllers
     public class BlogController : ControllerBase
     {
         private readonly BlogData _blogData;
-        public BlogController(BlogData blogData)
+        private readonly CommentData _commentData;
+        public BlogController(BlogData blogData,CommentData commentData)
         {
             _blogData = blogData;
+            _commentData = commentData;
         }
 
         [HttpGet("")]
@@ -27,6 +29,11 @@ namespace BlogAPI.Controllers
 
             return Ok(_blogData.GetBlog(id));
         }
+        [HttpGet("{blogId:long}/comments")]
+        public IActionResult GetCommentsByBlogId(long blogId)
+        {
+            return Ok(_commentData.GetCommentsByBlogId(blogId));
+;        }
         [HttpGet("user/blogs")]
         [Authorize]
         public IActionResult GetUserBlog()

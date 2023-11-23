@@ -13,6 +13,7 @@
           "BCrypt.Net-Next": "4.0.3",
           "Microsoft.AspNet.WebApi.Core": "5.3.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.14",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "7.0.14",
           "Microsoft.AspNetCore.OpenApi": "7.0.11",
           "Microsoft.EntityFrameworkCore": "7.0.14",
           "Microsoft.EntityFrameworkCore.Design": "7.0.14",
@@ -130,6 +131,31 @@
         },
         "runtime": {
           "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "assemblyVersion": "7.0.14.0",
+            "fileVersion": "7.0.1423.52316"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.JsonPatch/7.0.14": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.JsonPatch.dll": {
+            "assemblyVersion": "7.0.14.0",
+            "fileVersion": "7.0.1423.52316"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/7.0.14": {
+        "dependencies": {
+          "Microsoft.AspNetCore.JsonPatch": "7.0.14",
+          "Newtonsoft.Json": "13.0.1",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {
             "assemblyVersion": "7.0.14.0",
             "fileVersion": "7.0.1423.52316"
           }
@@ -810,6 +836,20 @@
       "sha512": "sha512-640Jjm2NnpQYHew0I2RyP2PjBKfB1ItSDYHX1TD+ooJov+b+ELPuo/GgrJCNJr3ZI1YmplmsQv88d8JRojZ+fA==",
       "path": "microsoft.aspnetcore.authentication.jwtbearer/7.0.14",
       "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.7.0.14.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.JsonPatch/7.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JDfx+i3bXFJ05ELOQbrgSnQxCbN2bHh2KXtMCQlceqIHVlHSiex+m6sUpx6UCUQzAhYkLktTQdFKsHYAb57hxQ==",
+      "path": "microsoft.aspnetcore.jsonpatch/7.0.14",
+      "hashPath": "microsoft.aspnetcore.jsonpatch.7.0.14.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/7.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pqXWiNXjgnAzofH5E+HzmYppy58+X2TY8gSao7PyWf1wa4IjHosNQ2UvnRZ0GRYgyV9xcQwuaKBFQqOJPCFCkg==",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/7.0.14",
+      "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.7.0.14.nupkg.sha512"
     },
     "Microsoft.AspNetCore.OpenApi/7.0.11": {
       "type": "package",

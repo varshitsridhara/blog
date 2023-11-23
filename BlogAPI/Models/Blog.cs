@@ -16,7 +16,9 @@ namespace BlogAPI.Models
         public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
         [Ignore]
         public string? OwnerName { get; set; }
+        public long Likes { get; set; }
         public User? user { get; set; }
+        public List<Comment>? Comments {  get; set; }
 
     }
 }
