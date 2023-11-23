@@ -42,9 +42,9 @@ namespace BlogAPI.Data
             else throw new  Exception("UserName or Password donot match");
 
         }
-        public User GetUser(string email)
+        public User GetUser(long userId)
         {
-            var user = _db.Users.Where(x => x.Email == email).FirstOrDefault();
+            var user = _db.Users.Where(x => x.Id == userId).FirstOrDefault();
             if (user is null)
             {
                 throw new KeyNotFoundException("User not found");

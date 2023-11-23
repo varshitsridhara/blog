@@ -1,4 +1,5 @@
 using AutoMapper;
+using BlogAPI;
 using BlogAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
@@ -17,7 +18,7 @@ builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-    .AddJwtBearer(options =>
+    .AddJwtBearer(options =>  
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -38,7 +39,7 @@ builder.Services.AddCors();
 //IMapper mapper = MappingConfig.RegisterMap().CreateMapper();
 //builder.Services.AddSingleton(mapper);
 //builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddControllers();
+
 builder.Services.AddControllers().AddJsonOptions(x =>
 {
     // serialize enums as strings in api responses (e.g. Role)
@@ -84,22 +85,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseCors(x => x
         .AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader());
 
-app.UseExceptionHandler(c => c.Run(async context =>
-{
-    Exception? exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
-   context.Response.StatusCode = 500;
-    await context.Response.WriteAsJsonAsync(new
-    {
-        detail = exception?.StackTrace,
-        message = exception?.Message,
+//app.UseExceptionHandler(c => c.Run(async context =>
+//{
+//    Exception? exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
+//   context.Response.StatusCode = 500;
+//    await context.Response.WriteAsJsonAsync(new
+//    {
+//        detail = exception?.StackTrace,
+//        message = exception?.Message,
                   
-    });
-}));
+//    });
+//}));
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

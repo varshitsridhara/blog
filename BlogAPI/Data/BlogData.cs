@@ -15,7 +15,7 @@ namespace BlogAPI.Data
         public List<BlogModel> GetBlogs()
 
         {
-            var blogs = _db.Blogs.Include(x => x.user).ToList();
+            var blogs = _db.Blogs.Include(x => x.user).OrderByDescending(x=>x.CreatedAt).ToList();
             blogs = blogs.Select(x => new BlogModel
             {
                 Id = x.Id,
@@ -41,11 +41,12 @@ namespace BlogAPI.Data
         public BlogModel GetBlog(long Id)
         {
             var blog = _db.Blogs.Where(x => x.Id == Id).Include(x => x.user).FirstOrDefault();
-            blog.user.Password = null;
             if (blog is null)
             {
                 throw new KeyNotFoundException("Blog not found");
             }
+            blog.user!.Password = null;
+
             return blog;
         }
         public bool UpdateBlog(BlogModel blog)

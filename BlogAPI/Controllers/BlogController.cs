@@ -44,7 +44,7 @@ namespace BlogAPI.Controllers
             }
             long userId = Convert.ToInt64(HttpContext.User.Claims.Where(x => x.Type.Equals("UserId", StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Value);
 
-            return Ok(_blogData.AddBlog(blog,userId));
+            return Created("/add-blog",_blogData.AddBlog(blog,userId));
         }
         [HttpPut("")]
         [Authorize]

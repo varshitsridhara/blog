@@ -2,6 +2,7 @@
 using BlogAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -29,7 +30,7 @@ namespace BlogAPI.Controllers
             }
             User currentUser = _userData.CreateUser(user);
             string tokenString = signToken(currentUser);
-            return Ok(new AuthenticatedResponse
+            return Created("/register",new AuthenticatedResponse
             {
                 Token = tokenString,
                 user = new Models.User
@@ -40,11 +41,13 @@ namespace BlogAPI.Controllers
                 }
             });
         }
-        [HttpGet("me/{email}")]
+        [HttpGet("me")]
         [Authorize]
-        public IActionResult GetUser(string email)
+        public IActionResult GetUser()
         {
-            return Ok(_userData.GetUser(email));
+            long userId = Convert.ToInt64(HttpContext.User.Claims.Where(x => x.Type.Equals("UserId", StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Value);
+
+            return Ok(_userData.GetUser(userId));
         }
         [HttpPost("login")]
         public IActionResult Login([FromBody] User user)
