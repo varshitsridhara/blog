@@ -7,7 +7,11 @@ import { Observable } from "rxjs";
     providedIn:"root"
 })
 export class BlogService{
-    private blogUrl = 'http://localhost:5280/api';
+    GetUserBlogs() {
+        return this.http.get<Blog[]>(`${this.blogUrl}/blog/user/blogs`);
+        
+    }
+    private blogUrl = 'https://blogapi20231122150631.azurewebsites.net/api';
     constructor(private http: HttpClient)    {
     }
 
@@ -26,14 +30,8 @@ export class BlogService{
         // return this.http.get(`${this.blogUrl}/blog`);
     }
     GetBlogById(id: number){
-        return this.http.get(`${this.blogUrl}/blog/${id}`)
+        return this.http.get<Blog>(`${this.blogUrl}/blog/${id}`)
     }
-    // // CreateNewPost(id:number, title: string, ownerName:string, content: string)
-    // {
-    //     // let newPost = new Blog(this.blogs.length + 1,title,ownerName, content)
-    //     // this.blogs.push(newPost);
-    //     return this.http.post(`${this.blogUrl}/blog`,JSON.stringify({id,title,content}))
-    // }
     createNewPost(newPost:any): Observable<any> {     
         return this.http.post(`${this.blogUrl}/blog`, newPost);   
     }
@@ -41,7 +39,12 @@ export class BlogService{
     EditBlog(id: number,title:string,content:string){
         this.http.put(`${this.blogUrl}/blog`,JSON.stringify({id,title,content}));
     }
+
+    UpdateBlog(updatedBlog: any): Observable<any> {     
+        const updateUrl = `${this.blogUrl}/blog`; // Adjust the URL accordingly     // Assuming you have an HTTP PUT request to update the blog    
+        return this.http.put(updateUrl, updatedBlog);   
+    }
     DeleteBlog(id:number){
-        this.http.delete(`${this.blogUrl}/blog/${id}`);
+        return this.http.delete(`${this.blogUrl}/blog/${id}`);
     }
 }

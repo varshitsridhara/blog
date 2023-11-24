@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BlogService } from '../Services/blog.service';
 import { Blog } from '../Models/Blog';
+import { UserService } from '../Services/user.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -13,8 +14,15 @@ export class BlogDetailsComponent implements OnInit {
   blogId: number = 0;
   blog:any ;
   isEditing:boolean=false;
+  isLoggedIn: boolean;
+ 
+  
 
-  constructor(private route: ActivatedRoute, private router: Router, private blogService: BlogService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private blogService: BlogService, private authService: UserService)
+   {
+    this.isLoggedIn = this.authService.isLoggedIn()
+
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -26,4 +34,15 @@ export class BlogDetailsComponent implements OnInit {
       });
     });
   }
+
+  backToHome() {     
+    console.log('IsLoggedIn:', this.authService.isLoggedIn());
+    if (this.authService.isLoggedIn()) {       // Navigate to user-home if logged in      
+      this.router.navigate(['/user-home']);     
+    } else {       // Navigate to homepage if not logged in      
+      this.router.navigate(['/homepage']);     
+    }   
+   
+   
+}
 }

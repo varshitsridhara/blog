@@ -4,42 +4,63 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../user';
+import { Blog } from '../Models/Blog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:5280/api/User'; // Replace with your actual API URL
+  private apiUrl = 'https://blogapi20231122150631.azurewebsites.net/api/user'; // Replace with your actual API URL
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser :undefined;
+private isloggedIn:boolean=false;
 
   constructor(private httpClient: HttpClient, public router: Router) {}
-  getUserByEmail(email:string){
-
-  }
-
+  
   login(user: User): Observable<any> {
+   
     return this.httpClient.post(`${this.apiUrl}/login`, user);
+   
+  
   }
+ 
+
 
   getAccessToken() {
     return localStorage.getItem('access_token');
   }
 
-  get isLoggedIn(): boolean {
+isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
-    return (authToken !== null);
+    return authToken !== null;
+    
   }
-
+get currentUser(){
+  const user=localStorage.getItem("user")!
+  return JSON.parse(user);
+}
   logout() {
+    console.log("successfully logout");
     localStorage.removeItem('access_token') ;
-      this.router.navigate(['login']);
+    localStorage.removeItem("user")
+
+      this.router.navigate(['homepage']);
     }
 
  
   registerUser(user: User): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/register`, user); 
         
+  }
+
+  getUserBlogs(): Observable<Blog[]> {
+    // Assuming you have a user ID stored in the currentUser property
+    const userId = this.currentUser ? this.currentUser.id : null;
+   
+    if (userId) {
+      return this.httpClient.get<Blog[]>(`${this.apiUrl}/user/${userId}/blogs`);
+    } else {
+      return throwError('User ID not available');
+    }
   }
   
 }

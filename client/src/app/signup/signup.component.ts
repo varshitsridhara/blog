@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
 import { User } from '../user';
-import { UserService } from '../services/user.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Message } from 'primeng/api';
+import { UserService } from '../Services/user.service';
 
 @Component({
   selector: 'app-signup',
