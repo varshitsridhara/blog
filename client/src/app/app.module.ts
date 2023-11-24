@@ -24,7 +24,11 @@ import { MessageService } from 'primeng/api';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { UserHomeComponent } from './user-home/user-home.component';
+import {ProgressSpinnerModule} from 'primeng/progressspinner'
 import { EditBlogComponent } from './edit-blo/edit-blo.component';
+import { CommentComponent } from './comment/comment.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
+import {InputTextareaModule} from 'primeng/inputtextarea'
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +40,9 @@ import { EditBlogComponent } from './edit-blo/edit-blo.component';
   BlogDetailsComponent,
     SignupComponent,
     UserHomeComponent,
-    EditBlogComponent
+    EditBlogComponent,
+    CommentComponent,
+    CommentListComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,9 @@ import { EditBlogComponent } from './edit-blo/edit-blo.component';
     AppRoutingModule,
     InputTextModule,HttpClientModule,
     ButtonModule,
+    ProgressSpinnerModule,
 HttpClientModule,
+InputTextareaModule,
 ToastModule,
 BrowserAnimationsModule,
 MessageModule,

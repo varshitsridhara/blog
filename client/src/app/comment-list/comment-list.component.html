@@ -1,0 +1,20 @@
+<ng-container *ngIf="!isFetching else loading">
+    <div class="comment" *ngFor="let comment of renderedComments;let idx =index;"
+        style="padding-left: 20px;margin-top: 10px;">
+        <app-comment [comment]="comment" (refreshParentComments)="this.getCommentById($event)"></app-comment>
+        <div *ngIf="comment.hasSubComment&&comment.showSubComments" class="sub-comments">
+            <app-comment-list [parentId]="comment.commentId"></app-comment-list>
+        </div>
+        <button pButton *ngIf="comment.hasSubComment " type="button" class="p-button-outlined"
+            (click)="toggleSubComments(idx)">
+            {{ comment.showSubComments? 'Hide' : 'Show' }} Sub-Comments
+        </button>
+
+
+    </div>
+</ng-container>
+<ng-template #loading>
+
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+        animationDuration=".5s"></p-progressSpinner>
+</ng-template>  

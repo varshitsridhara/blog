@@ -10,7 +10,13 @@
     <h3 class="blog-author">Author: {{ blog.user.userName }}</h3>
     <p class="blog-content" [innerHTML]="blog.content"></p>
 </div>
-
+<ng-container *ngIf="blogId">
+    <app-comment-list [comments]="comments" (refreshComments)="getComments()"></app-comment-list>
+    <form>
+        <textarea rows="2" class="w-full" name="content" [(ngModel)]="content" pInputTextarea></textarea>
+        <button pButton type="button" label="Add Comment" class="p-button-success" (click)="addComment()"></button>
+    </form>
+</ng-container>
 <!-- blog-detail.component.html -->
 
 <div *ngIf="isCurrentUserAuthor">
