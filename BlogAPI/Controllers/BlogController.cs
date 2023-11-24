@@ -63,7 +63,7 @@ namespace BlogAPI.Controllers
             }
             long userId = Convert.ToInt64(HttpContext.User.Claims.Where(x => x.Type.Equals("UserId", StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Value);
             var currBlog = _blogData.GetBlog(blog.Id);
-            if (currBlog.user?.Id != userId)
+            if (currBlog.userId != userId)
             {
                 return Unauthorized();
             }
@@ -75,7 +75,7 @@ namespace BlogAPI.Controllers
         {
             long userId = Convert.ToInt64(HttpContext.User.Claims.Where(x => x.Type.Equals("UserId", StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Value);
             var currBlog = _blogData.GetBlog(id);
-            if (currBlog.user?.Id != userId)
+            if (currBlog.userId != userId)
             {
                 return Unauthorized();
             }

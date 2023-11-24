@@ -15,7 +15,7 @@ namespace BlogAPI.Data
         public List<BlogModel> GetBlogs()
 
         {
-            var blogs = _db.Blogs.Include(x => x.user).OrderByDescending(x=>x.CreatedAt).ToList();
+            var blogs = _db.Blogs.Include(x => x.User).OrderByDescending(x=>x.CreatedAt).ToList();
             blogs = blogs.Select(x => new BlogModel
             {
                 Id = x.Id,
@@ -23,7 +23,7 @@ namespace BlogAPI.Data
                 Content = x.Content,
                 CreatedAt = x.CreatedAt,
                 UpdatedAt = x.UpdatedAt,
-                OwnerName = x.user?.UserName,
+                OwnerName = x.User?.UserName,
 
             }).ToList();
             return blogs;
@@ -31,7 +31,7 @@ namespace BlogAPI.Data
         public List<BlogModel> GetUserBlog(long userId)
         {
 
-            var blogs = _db.Blogs.Where(x => x.user!.Id == userId).ToList();
+            var blogs = _db.Blogs.Where(x => x.userId == userId).ToList();
             if (blogs is null)
             {
                 throw new KeyNotFoundException("No Blogs found");
@@ -40,12 +40,12 @@ namespace BlogAPI.Data
         }
         public BlogModel GetBlog(long Id)
         {
-            var blog = _db.Blogs.Where(x => x.Id == Id).Include(x => x.user).Include(x=>x.Comments).FirstOrDefault();
+            var blog = _db.Blogs.AsNoTracking().Where(x => x.Id == Id).Include(x => x.User).Include(x=>x.Comments).FirstOrDefault();
             if (blog is null)
             {
                 throw new KeyNotFoundException("Blog not found");
             }
-            blog.user!.Password = null;
+            blog.User!.Password = null;
 
             return blog;
         }
@@ -69,7 +69,7 @@ namespace BlogAPI.Data
             var user = _db.Users.Where(x => x.Id == userId).FirstOrDefault();
             if(user != null)
             {
-                blog.user=user;
+                blog.User =user;
                 _db.Blogs.Add(blog);
                 _db.SaveChanges();
                 return true;

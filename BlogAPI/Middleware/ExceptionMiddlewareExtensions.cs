@@ -59,7 +59,7 @@ public class ExceptionHandlerMiddleware : AbstractExceptionHandlerMiddleware
         {
             case KeyNotFoundException
                 or FileNotFoundException:
-                code = HttpStatusCode.NoContent;
+                code = HttpStatusCode.NotFound;
                 break;
 
             case UnauthorizedAccessException:

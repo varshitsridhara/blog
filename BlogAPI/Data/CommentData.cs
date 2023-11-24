@@ -1,4 +1,5 @@
 ﻿using BlogAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogAPI.Data
 {
@@ -22,6 +23,15 @@ namespace BlogAPI.Data
 
 
         }
+        public Comment? GetCommentById(long id)
+        {
+            var comment= _db.Comments.Where(x => x.CommentId == id).Include(x => x.Comments).FirstOrDefault();
+            if(comment is not null &&comment.Comments is not null)
+            {
+                comment.HasSubComment = true;
+            }
+            return comment;
+        }
         public List<Comment>? FindCommentByParentCommentId(long parentCommentId)
         {
             List<Comment>? comments = _db.Comments.Where(x=>x.ParentCommentId==parentCommentId).ToList();
@@ -42,7 +52,6 @@ namespace BlogAPI.Data
             Comment? parentComment = _db.Comments.Find(parentId);
             if (parentComment == null)
                 throw new KeyNotFoundException("Parent comment not found");
-            comment.ParentComment=parentComment;
             _db.Comments.Add(comment);
             _db.SaveChanges();
             return true;

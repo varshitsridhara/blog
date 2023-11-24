@@ -1,0 +1,17 @@
+<div class="comment-header">
+  <p>{{ comment.content }}</p>
+  <div class="comment-actions">
+    <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-outlined"
+      (click)="toggleTextArea()"></button>
+    <!-- <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-outlined"
+      (click)="deleteComment(comment)"></button> -->
+  </div>
+</div>
+<div *ngIf="showTextArea" class="add-comment-section" style="margin-top: 10px;">
+  <form>
+    <textarea rows="2" class="w-full" name="content" [(ngModel)]="content" pInputTextarea></textarea>
+    <button pButton type="button" label="Add Comment" class="p-button-success" (click)="addComment(comment)"></button>
+  </form>
+
+
+</div>

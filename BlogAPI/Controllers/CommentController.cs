@@ -1,5 +1,6 @@
 ﻿using BlogAPI.Data;
 using BlogAPI.Models;
+using BlogAPI.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAPI.Controllers
@@ -13,8 +14,12 @@ namespace BlogAPI.Controllers
         {
             this._commentData=commentData;
         }
-
-        [HttpGet("{parentCommentId:long}")]
+        [HttpGet("{id:long}")]
+        public IActionResult GetCommentById(long id)
+        {
+            return Ok(_commentData.GetCommentById(id));
+        }
+        [HttpGet("{parentCommentId:long}/subComments")]
         public IActionResult GetCommentsByParentCommentId(long parentCommentId)
         {
             return Ok(_commentData.FindCommentByParentCommentId(parentCommentId));
@@ -24,20 +29,32 @@ namespace BlogAPI.Controllers
         {
             return Ok(_commentData.UpdateComment(comment));
         }
-        [HttpDelete]
+        [HttpDelete("{id:long}")]
         public IActionResult DeleteComment(long id)
         {
             return
                 Ok(_commentData.DeleteComment(id));
         }
         [HttpPost("ParentComment")]
-        public IActionResult AddComment(Comment comment)
+        public IActionResult AddComment(CommentDTO commentDTO)
         {
+            Comment comment = new Comment
+            {
+                BlogId = commentDTO.BlogId,
+                Content = commentDTO.Content,
+
+            };
             return Created("comment", _commentData.AddParentComment(comment));
         }
-        [HttpPost("SubComment/{id:long}")]
-        public IActionResult AddSubComment(Comment comment,long id)
+        [HttpPost("{id:long}/SubComment")]
+        public IActionResult AddSubComment([FromBody]CommentDTO commentDTO,long id)
         {
+            Comment comment = new Comment
+            {
+                Content = commentDTO.Content,
+                ParentCommentId=commentDTO.ParentCommentId,
+                
+            };
             return Created("comment", _commentData.AddSubComment(comment, id));
         }
            

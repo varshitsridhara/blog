@@ -1,27 +1,23 @@
 ﻿using BlogAPI.Data;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace BlogAPI.Models
+namespace BlogAPI.Models.DTO
 {
-    public class Comment
+    public class CommentDTO
     {
-        [Key]
         public long CommentId { get; set; }
         public string? Content { get; set; }
         public long Likes { get; set; }
-        [ForeignKey("BlogModel")]
-        public long BlogId {  get; set; }
-        public long? ParentCommentId {  get; set; }
+        public long BlogId { get; set; }
+        public long? ParentCommentId { get; set; }
         [NotMapped]
         public bool HasSubComment
         {
-            get;set;
+            get; set;
         }
         public Comment? ParentComment { get; set; }
         
-        public List<Comment>? Comments { get; set;}
-       
-        public Comment() { }
+
     }
 }

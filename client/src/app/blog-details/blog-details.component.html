@@ -1,0 +1,16 @@
+<div class="blog-item">
+    <h2>Blog Title : {{blog.title}}</h2>
+    <p>Author: {{ blog.user.userName }}</p>
+    <p>{{blog.content}}</p>
+</div>
+<ng-container *ngIf="blogId">
+    <app-comment-list [comments]="comments" (refreshComments)="getComments()"></app-comment-list>
+    <form>
+        <textarea rows="2" class="w-full" name="content" [(ngModel)]="content" pInputTextarea></textarea>
+        <button pButton type="button" label="Add Comment" class="p-button-success" (click)="addComment()"></button>
+    </form>
+</ng-container>
+<!-- <div class="blog-buttons">
+        <button class="button"  >Edit Blog</button>
+        <button class="button">Delete Blog</button>
+    </div> -->

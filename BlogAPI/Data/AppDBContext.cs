@@ -35,7 +35,7 @@ namespace BlogAPI.Data
           .HasOne(e => e.ParentComment)           
           .WithMany(e => e.Comments)       
           .HasForeignKey(e => e.ParentCommentId)     
-          .OnDelete(DeleteBehavior.Restrict);
+          .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<User>().HasData(
             new User()
             {
