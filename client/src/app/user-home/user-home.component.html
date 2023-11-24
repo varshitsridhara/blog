@@ -1,15 +1,16 @@
 <app-header>
-    <li headerComp2><a routerLink="/login" class="button nav">Login</a></li>
-    <li headerComp3><a routerLink="/sign-up" class="Button nav">Sign Up</a></li>
+    <li headerComp1><a routerLink="/user-dashboard" class="Button nav">My Blogs</a></li>
+    <li headerComp3><a routerLink="/homepage" (click)="logout()"class="Button nav">Sign out</a></li>
 </app-header>
 
 <div class="blog-item" *ngFor="let blog of blogList">
     <a routerLink="/blog-details/{{ blog.id }}">
         <div class="blog-content">
-        .
+        
         <h2>{{ blog.title }}</h2>
         <p>Author: {{ blog.ownerName }}</p>
         <p>Created at: {{ blog.createdAt }}</p>
     </div>
     </a>
 </div>
+

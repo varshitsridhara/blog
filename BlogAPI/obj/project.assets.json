@@ -3745,11 +3745,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Desktop\\Internship\\blog\\BlogAPI\\BlogAPI.csproj",
+      "projectUniqueName": "c:\\Users\\admin\\Desktop\\Internship\\blog\\BlogAPI\\BlogAPI.csproj",
       "projectName": "BlogAPI",
-      "projectPath": "C:\\Users\\admin\\Desktop\\Internship\\blog\\BlogAPI\\BlogAPI.csproj",
+      "projectPath": "c:\\Users\\admin\\Desktop\\Internship\\blog\\BlogAPI\\BlogAPI.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\Desktop\\Internship\\blog\\BlogAPI\\obj\\",
+      "outputPath": "c:\\Users\\admin\\Desktop\\Internship\\blog\\BlogAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"

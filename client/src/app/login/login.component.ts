@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
 import { MessageService } from 'primeng/api';
 import { Message } from 'primeng/api';
+import { UserService } from '../Services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -35,9 +35,10 @@ constructor(private fb: FormBuilder, private userService: UserService, private r
           // Handle successful login
           console.log('Login successful', response);
           localStorage.setItem("access_token",response.token);
-          this.userService.currentUser=response.user;
+
+          localStorage.setItem("user",JSON.stringify(response.user));
           // Redirect or perform additional actions as needed
-          this.router.navigate(['/user-dashboard']);
+          this.router.navigate(['/user-home']);
         },
         (error:any) => {
           // Handle login error

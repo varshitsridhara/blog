@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../Services/blog.service';
 import { Blog } from '../Models/Blog';
+import { Message } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-post',
@@ -9,12 +12,15 @@ import { Blog } from '../Models/Blog';
 })
 export class NewPostComponent implements OnInit{
   blogList: Blog[]=[];
-  text: string='Hello World';
+  text: string='';
   ownerName: string='OwnerNew';
   blogTitle: string='';
+  messages:Message[] =[];
+
   
-  constructor(private blogservice: BlogService) {}
+  constructor(private blogservice: BlogService, private router: Router) {}
   ngOnInit(){
+  
     this.loadBlogList();
   }
 
@@ -27,9 +33,6 @@ export class NewPostComponent implements OnInit{
   }
 
   publishBlog(): void {
-    // Handle the blog publishing logic
-    console.log('Blog Title:', this.blogTitle);
-    console.log('Blog Content:', this.text );
 
     const newPost = {
       title: this.blogTitle,
@@ -37,13 +40,23 @@ export class NewPostComponent implements OnInit{
       content: this.text
     };
      
-    this.blogservice.createNewPost(newPost).subscribe((response) => {
+    this.blogservice.createNewPost(newPost).subscribe((response : any) => {
+
       console.log('Blog created successfully:', response);
       this.loadBlogList();
-      
-      // Reload the blog list after creating a new post
-    
-    });
+      this.router.navigate(['/user-dashboard']);
+    },
+    (error:any) => {
+      // Handle login error
+      console.log(error);
+      this.messages = [
+        { severity: 'error', summary: 'Error', detail: error.error.message },
+    ];
+    }
+  );
+  }
+  isPublishEnabled() : boolean{
+    return this.blogTitle.trim() !== '' && this.text.trim() !=='';
   }
 
   }

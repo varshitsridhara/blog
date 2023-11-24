@@ -48,19 +48,6 @@
     box-sizing: border-box;
 }
 
-/* Add styling for the publish button */
-.publish-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    margin-top: 5%;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.publish-button:hover {
-    background-color: #0056b3;
-}
 
 
 

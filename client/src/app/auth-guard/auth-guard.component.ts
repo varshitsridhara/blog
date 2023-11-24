@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot,RouterStateSnapshot,UrlTree,Router,CanActivateFn } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user.service';
 
 
 import { Component } from '@angular/core';
+import { UserService } from '../Services/user.service';
 
 @Component({
   selector: 'app-auth-guard',
@@ -26,12 +26,14 @@ constructor(
 canActivate(
   next: ActivatedRouteSnapshot,
   state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-  if (this.authService.isLoggedIn !== true) {
-    window.alert("Access not allowed!");
-    this.router.navigate(['login']);
-    return false;
-
-  }else
-  return true;
+    if (this.authService.isLoggedIn()) {
+      // User is logged in, allow access
+      return true;
+    } else {
+      // User is not logged in, navigate to the homepage
+      alert("you are not allowed to access page");
+      this.router.navigate(['/homepage']);
+      return false;
+    }
 }
 }

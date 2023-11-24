@@ -4,43 +4,49 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../user';
+import { Blog } from '../Models/Blog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'https://blogapi20231122150631.azurewebsites.net/api/User'; // Replace with your actual API URL
+  private apiUrl = 'https://blogapi20231122150631.azurewebsites.net/api/user'; // Replace with your actual API URL
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser :undefined|User;
+private isloggedIn:boolean=false;
 
   constructor(private httpClient: HttpClient, public router: Router) {}
-  getUserByEmail(email: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.apiUrl}/getUserByEmail/${email}`);
-  }
   
-
   login(user: User): Observable<any> {
+   
     return this.httpClient.post(`${this.apiUrl}/login`, user);
+   
+  
   }
+ 
+
 
   getAccessToken() {
     return localStorage.getItem('access_token');
   }
 
-  get isLoggedIn(): boolean {
+isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
-    return (authToken !== null);
+    return authToken !== null;
+    
   }
-
+get currentUser(){
+  const user=localStorage.getItem("user")!
+  return JSON.parse(user);
+}
   logout() {
+    console.log("successfully logout");
     localStorage.removeItem('access_token') ;
-      this.router.navigate(['login']);
+    localStorage.removeItem("user")
+
+      this.router.navigate(['homepage']);
     }
 
  
   registerUser(user: User): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/register`, user); 
-        
-  }
-  
-}
+  }}
