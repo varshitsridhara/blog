@@ -24,7 +24,7 @@ export class UserDashboardComponent {
     });
   }
   editPage(blogId: number) {
-    this.router.navigate(['/edit-blo', blogId]);
+    this.router.navigate([`/edit-blo/${blogId}`]);
   }
 
   deletePost(blogId: number){
