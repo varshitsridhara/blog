@@ -7,7 +7,14 @@
         <button class="button">Delete Blog</button>
     </div> -->
 
+<!-- blog-detail.component.html -->
 
+<div *ngIf="isCurrentUserAuthor">
+    <!-- Show edit controls -->
+    <button (click)="editPost()">Edit Post</button>
+
+  </div>
+  
 
 
 

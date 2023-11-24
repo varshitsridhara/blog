@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignupComponent},
   { path: 'blog-details/:id', component: BlogDetailsComponent },
   { path: 'blog-list',  component: BlogListComponent},
+  { path: 'user-home',  component: BlogListComponent},
   { path: 'user-blog-details', component: UserBlogDetailsComponent},
   { path: '', redirectTo: '/homepage', pathMatch: 'full' }
 ];

@@ -32,7 +32,7 @@
 
     <div>
       <div class="card flex justify-content-center">
-        <button pButton pRipple label="Signup" class="p-button-success" type="submit" [disabled]="signupForm.invalid"></button>
+        <a routerLink="/user-home"><button pButton pRipple label="Signup" class="p-button-success" type="submit" [disabled]="signupForm.invalid"></button></a>
         <a routerLink="/login"><p-button label="Login"></p-button></a>
       </div>
       <p-messages [(value)]="successmessages" [enableService]="false" [closable]="false"></p-messages>

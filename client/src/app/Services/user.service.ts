@@ -9,14 +9,15 @@ import { User } from '../user';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:5280/api/User'; // Replace with your actual API URL
+  private apiUrl = 'https://blogapi20231122150631.azurewebsites.net/api/User'; // Replace with your actual API URL
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser :undefined;
+  currentUser :undefined|User;
 
   constructor(private httpClient: HttpClient, public router: Router) {}
-  getUserByEmail(email:string){
-
+  getUserByEmail(email: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.apiUrl}/getUserByEmail/${email}`);
   }
+  
 
   login(user: User): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/login`, user);
