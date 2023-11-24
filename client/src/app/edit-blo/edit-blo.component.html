@@ -1,11 +1,10 @@
 <app-header>
     <li headerComp1><a routerLink="/user-dashboard" class="Button nav">Back to dashboard</a></li>
 </app-header>
-
-<div class="card">
+<div *ngIf="Authorized; else unauthorized"  class="card">
     <div class="form-group">
         <label for="blogTitle">Blog Title </label>
-        <input type="text" id="blogTitle" [(ngModel)]="blogTitle" class="form-control" [ngClass]="{'input': true}">
+        <input type="text" id="blogTitle" [(ngModel)]="title" class="form-control" [ngClass]="{'input': true}">
     </div>
 
     <p-editor [(ngModel)]="text" [ngClass]="{'p-editor' : true}" [style]="{ height: '320px' }">
@@ -19,7 +18,9 @@
     </p-editor>
 
     <div class="form-group">
-            <p-button label="Publish" [disabled]="!isPublishEnabled()" (click)="publishBlog()"></p-button>
-    </div>
-    <p-messages [(value)]="messages" [enableService]="false"></p-messages>
+        <p-button label="Update" [disabled]="!isUpdateEnabled()" (click)="updateBlog()"></p-button>
 </div>
+</div>
+<ng-template #unauthorized>
+    <p>You are not authorized to edit this blog.</p>
+</ng-template>
